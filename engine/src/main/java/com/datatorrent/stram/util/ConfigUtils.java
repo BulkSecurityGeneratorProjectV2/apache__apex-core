@@ -144,7 +144,7 @@ public class ConfigUtils
       try {
         String logDirsPath = new File(logDirs).getCanonicalPath();
         String yarnLogDirPath = new File(getYarnLogDir()).getCanonicalPath();
-        if (logDirsPath.startsWith(yarnLogDirPath)) {
+        if (new File(logDirs).getCanonicalFile().toPath().startsWith(yarnLogDirPath)) {
           return ConfigUtils.getSchemePrefix(conf) + nodeHttpAddress + "/logs" + logDirsPath
               .substring(yarnLogDirPath.length()) + "/" + appId + "/" + containerId;
         } else {

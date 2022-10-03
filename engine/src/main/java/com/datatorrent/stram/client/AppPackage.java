@@ -320,6 +320,9 @@ public class AppPackage implements Closeable
     ZipArchiveEntry entry = input.getNextZipEntry();
     while (entry != null) {
       File newFile = new File(directory, entry.getName());
+      if (!newFile.toPath().normalize().startsWith(directory.toPath().normalize())) {
+        throw new IOException("Bad zip entry");
+      }
       if (entry.isDirectory()) {
         newFile.mkdirs();
       } else {

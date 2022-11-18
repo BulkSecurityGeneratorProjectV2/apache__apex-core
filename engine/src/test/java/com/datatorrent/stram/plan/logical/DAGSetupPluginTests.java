@@ -21,6 +21,7 @@ package com.datatorrent.stram.plan.logical;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -83,7 +84,7 @@ public class DAGSetupPluginTests
   @Test
   public void testPropertyFileApp() throws IOException
   {
-    File tempFile = File.createTempFile("testTopology", "properties");
+    File tempFile = Files.createTempFile("testTopology", "properties").toFile();
     org.apache.commons.io.IOUtils.copy(getClass().getResourceAsStream("/testTopology.properties"), new FileOutputStream(tempFile));
     StramAppLauncher.PropertyFileAppFactory factory = new StramAppLauncher.PropertyFileAppFactory(tempFile);
     Configuration conf = getConfiguration();
@@ -95,7 +96,7 @@ public class DAGSetupPluginTests
   @Test
   public void testJsonFileApp() throws IOException
   {
-    File tempFile = File.createTempFile("testTopology", "json");
+    File tempFile = Files.createTempFile("testTopology", "json").toFile();
     org.apache.commons.io.IOUtils.copy(getClass().getResourceAsStream("/testTopology.json"), new FileOutputStream(tempFile));
     StramAppLauncher.JsonFileAppFactory factory = new StramAppLauncher.JsonFileAppFactory(tempFile);
     Configuration conf = getConfiguration();

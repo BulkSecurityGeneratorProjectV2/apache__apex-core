@@ -65,7 +65,7 @@ public class JarHelper
     if (!dir.exists() || !dir.isDirectory()) {
       throw new IllegalArgumentException(String.format("dir %s must be an existing directory.", dir));
     }
-    File temp = File.createTempFile(prefix, ".jar");
+    File temp = Files.createTempFile(prefix, ".jar").toFile();
     if (deleteOnExit) {
       temp.deleteOnExit();
     }

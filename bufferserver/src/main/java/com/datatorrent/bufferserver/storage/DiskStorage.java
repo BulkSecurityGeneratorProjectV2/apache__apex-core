@@ -21,6 +21,7 @@ package com.datatorrent.bufferserver.storage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class DiskStorage implements Storage
 
   public DiskStorage() throws IOException
   {
-    File tempFile = File.createTempFile("msp", "msp");
+    File tempFile = Files.createTempFile("msp", "msp").toFile();
     basePath = tempFile.getParent();
     tempFile.delete();
     logger.info("using {} as the basepath for spooling.", basePath);
